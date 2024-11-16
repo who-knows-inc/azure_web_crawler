@@ -1,5 +1,11 @@
 # azure_web_crawler
 
+Creates an Azure Function that scrapes 10 Wikipedia links and returns the content.
+
+This example is setup as an HTTP trigger for easy debugging but in production you would want to use a timer trigger.
+
+---
+
 ## Setup
 
 Storage account names must be globally unique. If you get an error when creating the storage account, try a different name.
