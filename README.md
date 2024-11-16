@@ -79,5 +79,4 @@ $ func azure functionapp publish web-crawler-func-app
 
 ```bash
 $ az group delete --name web-crawler-rg --yes --no-wait
-$ az storage account delete --name webcrawlerstorage12 --resource-group class-http-trigger-rg --yes
 ```
