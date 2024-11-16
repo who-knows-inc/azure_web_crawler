@@ -12,7 +12,11 @@ az storage account create --name webcrawlerstorage12 --location westeurope --res
 az functionapp create --resource-group web-crawler-rg --consumption-plan-location westeurope --runtime node --runtime-version 20 --functions-version 4 --name web-crawler-func-app --storage-account webcrawlerstorage12 --os-type Linux
 ``` 
 
+---
+
 ## Initialize
+
+### This step is if you want to create a function from scratch. If you want to run the code then skip to deploy.
 
 ```bash
 $ func init web-crawler-func-app --javascript
@@ -20,7 +24,7 @@ $ cd web-crawler-func-app
 $ func new --name web-crawler-func-app --template "HTTP trigger"
 ```
 
-Create a `functions.json` in `src/functions/CrawlerFunctions` with this content:
+Create a `functions.json` in `web-crawler-func-app/src/functions` with this content:
 
 ```json
 {
@@ -50,6 +54,14 @@ $ npm install jsdom
 ---
 
 ## Deploy
+
+Before you deploy you can always test it locally:
+
+```bash
+$ func start
+```
+
+Once you confirm that it works, you can deploy it to Azure Functions:
 
 ```bash
 $ func azure functionapp publish web-crawler-func-app
