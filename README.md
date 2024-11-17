@@ -14,7 +14,9 @@ Make sure that you have the Azure CLI installed:
 $ az --version
 ```
 
-And `func` which you can install with npm:
+Otherwise, install it from [here](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli).
+
+And `func` which you can install with [npm](https://www.npmjs.com/package/azure-functions-core-tools):
 
 ```bash
 $ npm install -g azure-functions-core-tools@4 --unsafe-perm true
