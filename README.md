@@ -6,6 +6,22 @@ This example is setup as an HTTP trigger for easy debugging but in production yo
 
 ---
 
+## Prerequisites
+
+Make sure that you have the Azure CLI installed:
+
+```bash
+$ az --version
+```
+
+And `func` which you can install with npm:
+
+```bash
+$ npm install -g azure-functions-core-tools@4 --unsafe-perm true
+```
+
+---
+
 ## Setup
 
 Storage account names must be globally unique. If you get an error when creating the storage account, try a different name.
