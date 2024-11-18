@@ -1,4 +1,4 @@
-# azure_web_crawler
+# Azure Web Crawler
 
 Creates an Azure Function that scrapes 10 Wikipedia links and returns the content.
 
@@ -34,7 +34,7 @@ az group create --name web-crawler-rg --location westeurope
 az storage account create --name webcrawlerstorage12 --location westeurope --resource-group web-crawler-rg --sku Standard_LRS
 
 az functionapp create --resource-group web-crawler-rg --consumption-plan-location westeurope --runtime node --runtime-version 20 --functions-version 4 --name web-crawler-func-app --storage-account webcrawlerstorage12 --os-type Linux
-``` 
+```
 
 ---
 
@@ -69,7 +69,7 @@ Create a `functions.json` in `web-crawler-func-app/src/functions` with this cont
 }
 ```
 
-Install the dependency:
+Install any dependency you might need to use. Example:
 
 ```bash
 $ npm install jsdom
@@ -84,6 +84,8 @@ Before you deploy you can always test it locally:
 ```bash
 $ func start
 ```
+
+Make sure to run from within the `web-crawler-func-app` folder which is where `host.json` is located.
 
 Once you confirm that it works, you can deploy it to Azure Functions:
 

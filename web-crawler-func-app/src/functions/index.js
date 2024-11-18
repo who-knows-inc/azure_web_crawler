@@ -2,7 +2,6 @@ const { app } = require('@azure/functions');
 const { JSDOM } = require('jsdom');
 
 const visitedUrls = new Set();
-let crawledContent = [];
 const links = [
     "https://en.wikipedia.org/wiki/Elasticsearch",
     "https://en.wikipedia.org/wiki/Main_Page",
@@ -44,7 +43,7 @@ async function crawlPage(pageUrl) {
             .trim();
 
         console.log('Indexing:', cleanUrl.href);
-        crawledContent.push({ url: cleanUrl.href, content: mainContent });
+        return { url: cleanUrl.href, content: mainContent };
 
     } catch (error) {
         console.error(`Error crawling ${cleanUrl.href}:`, error);
@@ -56,14 +55,9 @@ app.http('web-crawler-func-app', {
     authLevel: 'anonymous',
     handler: async (request, context) => {
 
-        // Reset state for each request
-        visitedUrls.clear();
-        crawledContent = [];
-
         try {
-            for (const link of links) {
-                await crawlPage(link);
-            }
+            const crawledContent = await Promise.all(links.map(crawlPage));
+
 
             for (let i = 0; i < crawledContent.length; i++) {
                 context.log(`URL: ${crawledContent[i].url}`);
@@ -71,10 +65,15 @@ app.http('web-crawler-func-app', {
                 context.log("==========================================================");
             }
 
-            return { body: crawledContent };
+            return {
+                status: 200,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(crawledContent),
+            };
         } catch (error) {
             context.log.error('Crawl process failed:', error);
             return { status: 500, body: 'An error occurred during the crawl.' };
         }
+        
     }
 });
