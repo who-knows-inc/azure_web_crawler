@@ -1,7 +1,6 @@
 const { app } = require('@azure/functions');
 const { JSDOM } = require('jsdom');
 
-const visitedUrls = new Set();
 const links = [
     "https://en.wikipedia.org/wiki/Elasticsearch",
     "https://en.wikipedia.org/wiki/Main_Page",
@@ -15,7 +14,7 @@ const links = [
     "https://en.wikipedia.org/wiki/Album"
 ];
 
-async function crawlPage(pageUrl) {
+async function crawlPage(pageUrl, visitedUrls) {
     const cleanUrl = new URL(pageUrl);
     cleanUrl.hash = '';
 
@@ -56,7 +55,8 @@ app.http('web-crawler-func-app', {
     handler: async (request, context) => {
 
         try {
-            const crawledContent = await Promise.all(links.map(crawlPage));
+            const visitedUrls = new Set();
+            const crawledContent = await Promise.all(links.map(link => crawlPage(link, visitedUrls)));
 
 
             for (let i = 0; i < crawledContent.length; i++) {

@@ -79,7 +79,7 @@ $ npm install jsdom
 
 ## Deploy
 
-Before you deploy you can always test it locally:
+Before you deploy you can always test it locally. Make sure to be inside of the function app folder for instance `web-crawler-func-app` in this project:
 
 ```bash
 $ func start
