@@ -19,7 +19,7 @@ Otherwise, install it from [here](https://learn.microsoft.com/en-us/cli/azure/in
 And `func` which you can install with [npm](https://www.npmjs.com/package/azure-functions-core-tools):
 
 ```bash
-$ npm install -g azure-functions-core-tools@4 --unsafe-perm true
+$ npm install -g azure-functions-core-tools@4
 ```
 
 ---
@@ -33,7 +33,7 @@ az group create --name web-crawler-rg --location westeurope
 
 az storage account create --name webcrawlerstorage12 --location westeurope --resource-group web-crawler-rg --sku Standard_LRS
 
-az functionapp create --resource-group web-crawler-rg --consumption-plan-location westeurope --runtime node --runtime-version 20 --functions-version 4 --name web-crawler-func-app --storage-account webcrawlerstorage12 --os-type Linux
+az functionapp create --resource-group web-crawler-rg --flexconsumption-location westeurope --runtime node --runtime-version 26 --name web-crawler-func-app --storage-account webcrawlerstorage12
 ```
 
 ---
